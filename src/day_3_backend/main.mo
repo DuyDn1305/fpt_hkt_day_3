@@ -16,7 +16,6 @@ import CustomList "list";
 import Cycles "mo:base/ExperimentalCycles";
 
 
-
 actor {
   // challenge 1 to 6
   type Pietree = MyCustom.Pietree;
@@ -125,12 +124,42 @@ actor {
     favoriteNumber.remove(caller.caller);
   };
 
-  public shared(caller) func deposit_cycles () : async Nat {
+  public func deposit_cycles () : async Nat {
     Cycles.available()
   };
 
-  public func balance() : async Nat {
-    return(Cycles.balance())
+  
+  // public func withdraw_cycles( n : Nat ) : async Nat {
+  //   return(Cycles.balance)
+  // };
+
+  stable var counter :  Nat = 0;
+  stable var versionNumber : Nat = 0;
+
+  public func increment_counter() : async Nat {
+    counter += 1;
+    return counter; 
   };
+  public func clear_counter() : async Nat {
+    counter := 0;
+    return 0;
+  };
+
+  public func get_counter_version () : async Nat {
+    versionNumber
+  };
+
+  system func preupgrade() {
+    // Do something before upgrade
+
+  };
+
+  system func postupgrade() {
+    // Do something after upgrade
+    versionNumber += 1;
+  };
+
+  
+  
 
 };
